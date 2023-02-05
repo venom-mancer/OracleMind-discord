@@ -52,5 +52,5 @@ async def command(message):
         await message.reply(bot_commands)
 
 
-
+#ADD poll to bot
 client.run(Token)
