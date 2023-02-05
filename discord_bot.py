@@ -1,46 +1,56 @@
 import discord
-from discord.ext import commands
+from discord.ext import commands , tasks
 from chat import chat_with_bot
+import random
+import re
 
-
+heros_list = ['Dragon Knight ', 'Earth Spirit', 'Earthshaker', 'Elder Titan', 'Huskar', 'Io', 'Kunkka ', 'Legion Commander', 'Lifestealer', 'Lycan', 'Magnus', 'Marci', 'Mars', 'Night', ' Stalker', 'Omniknight', 'Phoenix', 'Primal Beast', 'Pudge', 'Sand King', 'Slardar', 'Snapfire', 'Spirit Breaker', 'Sven', 'Tidehunter', 'Timbersaw', 'Tiny', 'Treant Protector', 'Tusk', 'Underlord', 'Undying', 'Wraith King', 'Anti-Mage', 'Arc Warden', 'Bloodseeker', 'Bounty Hunter', 'Broodmother', 'Clinkz', 'Drow Ranger', 'Ember Spirit', 'Faceless Void', 'Gyrocopter', 'Hoodwink', 'Juggernaut', 'Lone Druid', 'Luna', 'Medusa', 'Meepo', 'Mirana', 'Monkey King', 'Morphling', 'Naga Siren', 'Nyx Assassin', 'Pangolier', 'Phantom Assassin', 'Phantom Lancer', 'Razor', 'Riki', 'Shadow Fiend', 'Slark', 'Sniper', 'Spectre', 'Templar Assassin', 'Terrorblade', 'Troll Warlord', 'Ursa', 'Vengeful Spirit', 'Venomancer', 'Viper', 'Weaver', 'Ancient Apparition', 'Bane', 'Batrider', 'Chen', 'Crystal Maiden', 'Dark Seer', 'Dark Willow', 'Dazzle', 'Death Prophet', 'Disruptor', 'Enchantress', 'Enigma', 'Grimstroke', 'Invoker', 'Jakiro', 'Keeper of the Light', 'Leshrac', 'Lich', 'Lina', 'Lion', 'Nature Prophet', 'Necrophos', 'Ogre Magi', 'Oracle', 'Outworld Destroyer', 'Puck', 'Pugna', 'Queen of Pain', 'Rubick', 'Shadow Demon', 'Shadow Shaman', 'Silencer', 'Skywrath Mage', 'Storm Spirit', 'Techies', 'Tinker', 'Visage', 'Void Spirit', 'Warlock', 'Windranger', 'Winter Wyvern', 'Witch Doctor', 'Zeus']
 Token = 'MTA3MTgyMzI2Nzg1MTE0OTM4Mg.GBEQn9.xWwABR558LNedRHB6gR0o8Eyy_HtbgtB_7qzmc'
 
-async def send_message(message,user_message,is_private):
-    try:
-        chat = chat_with_bot.talktobot(user_message)
-        print(user_message)
-        await message.author.send(chat) if is_private else await message.channel.send(chat)
-    except Exception as e:
-        print(e)
+client = commands.Bot(command_prefix = "$" , intents = discord.Intents.all())
 
 
-def run_discord_bot():
+@client.event
+async def on_ready():
+    print('success bot is running ')
+    await client.change_presence(activity=discord.Activity(type=discord.ActivityType.listening, name="command | $command"))
 
-    client = discord.Client(intents=discord.Intents.default())
+@client.command()
+async def ask(message):
 
-    @client.event
-    async def on_ready():
-        print("{} is now running !".format(client.user))
+    user_message = str(message.message.content)
+    chat = chat_with_bot.talktobot(user_message[4:])
+    await message.reply(chat)
 
-    @client.event
-    async def on_message(message):
-        if message.author == client.user:
-            return
+@client.command()
+async def roll(message):
 
-        username = str(message.author)
-        user_message = str(message.content)
-        channel = str(message.channel)
+    user_message = str(message.message.content)[5:]
+    if user_message == '':
+        await message.reply('roll works with 2 input numbers (beginning - End) ----> like roll 1-60')
+    else:
+        numbers = re.findall(r'\d+', user_message)
+        roll_result = random.randint(int(numbers[0]),int(numbers[1]))
+        await message.reply(roll_result)
 
-        print("{} said : {} in {}".format(username,user_message,channel))
+@client.command()
+async def rollhero(message):
 
-        if user_message.startswith('%'):
-            user_message = user_message[1:]
-            await send_message(message , user_message, is_private=True)
-        else:
-            await send_message(message , user_message, is_private=False)
+    user_message = str(message.message.content)
+    if user_message != '$rollhero':
+        await message.reply('rollhero works with a simple command $rollhero Which it gives you a random hero to play a game with')
+    else:
+        random_hero = random.choice(heros_list)
+        await message.reply("Its Time to Play {} , I challenge you :)".format(random_hero))
 
-    client.run(Token)
+@client.command()
+async def command(message):
+
+    user_message = str(message.message.content)
+    if user_message == '$command':
+        bot_commands = '1- $roll is for rolling number \n 2- $rollhero is for rolling a dota2 hero \n 3- $ask is for asking anything from the bot'
+        await message.reply(bot_commands)
 
 
-if __name__ == '__main__':
-    run_discord_bot()
+
+client.run(Token)
