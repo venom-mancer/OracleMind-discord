@@ -1,5 +1,6 @@
 import discord
 from discord.ext import commands , tasks
+from discord import embeds
 from chat import chat_with_bot
 import random
 import re
@@ -48,8 +49,17 @@ async def command(message):
 
     user_message = str(message.message.content)
     if user_message == '$command':
-        bot_commands = '1- $roll is for rolling number \n 2- $rollhero is for rolling a dota2 hero \n 3- $ask is for asking anything from the bot'
+        bot_commands = '1- $roll is for rolling number \n2- $rollhero is for rolling a dota2 hero \n3- $ask is for asking anything from the bot\n4- $poll is for creating a poll'
         await message.reply(bot_commands)
+
+
+@client.command()
+async def poll(ctx,*,message):
+
+    emb = discord.Embed(title='Poll',description="{}".format(message),color=0x00ff00)
+    question = await ctx.channel.send(embed=emb)
+    await question.add_reaction('✅')
+    await question.add_reaction('❌')
 
 
 #ADD poll to bot
