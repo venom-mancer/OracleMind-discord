@@ -62,5 +62,6 @@ async def poll(ctx,*,message):
     await question.add_reaction('❌')
 
 
-#ADD poll to bot
+#react to mentions if $rape
+
 client.run(Token)
