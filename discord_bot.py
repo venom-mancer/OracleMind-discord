@@ -113,5 +113,5 @@ async def clapass(message):
 
 
 #create embed for $help stop using $command
-
+#add count servers $svcount
 client.run(Token)
