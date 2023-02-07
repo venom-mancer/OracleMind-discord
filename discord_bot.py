@@ -49,10 +49,10 @@ async def command(message):
 
     user_message = str(message.message.content)
     if user_message == '$command':
-        bot_commands = '1- $roll is for rolling number \n2- $rollhero is for rolling a dota2 hero \n3- $ask is for asking anything from the AIBot\n4- $poll is for creating a poll'
+        bot_commands = '1- $roll is for rolling number \n2- $rollhero is for rolling a dota2 hero \n3- $ask is for asking anything from the AIBot\n4- $poll is for creating a poll\n5- $clapass works with mentioning a user so bot clap his/her Ass'
         await message.reply(bot_commands)
 
-
+#Creates poll with only 2 reactions , color is for embed label color and title is for embed poll title
 @client.command()
 async def poll(ctx,*,message):
 
@@ -83,6 +83,31 @@ async def inform(message):
     else:
         await message.author.send('Only Main-Admin can use this Hidden command')
 
-#react to mentions if $rape
-#fix error code 50001 and 50003 missing access and missing permission
+
+#react to mentions if $clapass
+@client.command()
+async def clapass(message):
+
+    user_message = str(message.message.content)
+    exclude = ["@here", "@everyone"]
+    match = re.search("@[^@]+", user_message)
+    
+    if match:
+        mentioned_user = re.findall("\d+", user_message)
+        user = client.get_user(int(mentioned_user[0]))
+        first_mention = match.group(0)
+        if first_mention not in exclude:
+            emb = discord.Embed(title='Your ass got clapped {}'.format(user.mention) , description='' , color=0x00ff00)
+            emb.set_image(url="https://media.discordapp.net/attachments/755342614345154631/1051217269302251591/70f07075-4b06-4c7d-ab49-abe737c0ddd7.gif")
+            await message.channel.send(embed=emb)
+
+        else:
+            next_mention = re.search("@[^@]+", user_message[match.start() + len(first_mention):])
+            if next_mention:
+                print(next_mention.group(0))
+            else:
+                print("NO")
+    else:
+        print("NO")
+
 client.run(Token)
