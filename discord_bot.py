@@ -94,20 +94,16 @@ async def clapass(message):
     
     if match:
         mentioned_user = re.findall("\d+", user_message)
-        user = client.get_user(int(mentioned_user[0]))
         first_mention = match.group(0)
         if first_mention not in exclude:
-            emb = discord.Embed(title='Your ass got clapped {}'.format(user.mention) , description='' , color=0x00ff00)
+            user = client.get_user(int(mentioned_user[0]))
+            emb = discord.Embed(title='Your ass got clapped {}'.format(user.name) , description='{}'.format(user.mention) , color=0x00ff00)
             emb.set_image(url="https://media.discordapp.net/attachments/755342614345154631/1051217269302251591/70f07075-4b06-4c7d-ab49-abe737c0ddd7.gif")
             await message.channel.send(embed=emb)
 
         else:
-            next_mention = re.search("@[^@]+", user_message[match.start() + len(first_mention):])
-            if next_mention:
-                print(next_mention.group(0))
-            else:
-                print("NO")
+            await message.reply('Cannot mention everyone !')
     else:
-        print("NO")
+        await message.reply('Could Not clap the User')
 
 client.run(Token)
