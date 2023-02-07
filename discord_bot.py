@@ -120,4 +120,5 @@ async def svcount(message):
     await message.reply('success , bot is running on {} servers'.format(len(client.guilds)))
 
 
+#create image $image 
 client.run(Token)
