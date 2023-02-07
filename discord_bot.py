@@ -14,7 +14,7 @@ client = commands.Bot(command_prefix = "$" , intents = discord.Intents.all())
 @client.event
 async def on_ready():
     print('success , bot is running on {} servers'.format(len(client.guilds)))
-    await client.change_presence(activity=discord.Activity(type=discord.ActivityType.listening, name="command | $command"))
+    await client.change_presence(activity=discord.Activity(type=discord.ActivityType.listening, name="Help | $helpme"))
 
 @client.command()
 async def ask(message):
@@ -45,18 +45,23 @@ async def rollhero(message):
         await message.reply("Its Time to Play {} , I challenge you :)".format(random_hero))
 
 @client.command()
-async def command(message):
+async def helpme(message):
 
     user_message = str(message.message.content)
-    if user_message == '$command':
-        bot_commands = '1- $roll is for rolling number \n2- $rollhero is for rolling a dota2 hero \n3- $ask is for asking anything from the AIBot\n4- $poll is for creating a poll\n5- $clapass works with mentioning a user so bot clap his/her Ass'
-        await message.reply(bot_commands)
+    if user_message == '$helpme':
+        emb = discord.Embed(title='OracleMind Help Page', description='⚙️In order to use commands use the prefix `$`\
+        followed by the command name', color=0x0d67d6)
+        emb.set_author(name='OracleMind' , icon_url='https://cdn.discordapp.com/app-icons/1071823267851149382/9c6f4e51b95efe0becd4efc1223d2a05.png')
+        emb.add_field(name='Utility commands' , value=' `$ask` `$roll` `$rollhero` `$poll` `$clapass` ')
+        emb.set_footer(icon_url ='https://img.icons8.com/color/512/python.png' , text = 'This Bot is made of Python and Openai(chatgpt)' )
+        await message.channel.send(embed=emb)
+
 
 #Creates poll with only 2 reactions , color is for embed label color and title is for embed poll title
 @client.command()
 async def poll(ctx,*,message):
 
-    emb = discord.Embed(title='Poll',description="{}".format(message),color=0x00ff00)
+    emb = discord.Embed(title='Poll',description="{}".format(message),color=0x0d67d6)
     question = await ctx.channel.send(embed=emb)
     await question.add_reaction('✅')
     await question.add_reaction('❌')
@@ -97,7 +102,7 @@ async def clapass(message):
         first_mention = match.group(0)
         if first_mention not in exclude:
             user = client.get_user(int(mentioned_user[0]))
-            emb = discord.Embed(title='Your ass got clapped {}'.format(user.name) , description='{}'.format(user.mention) , color=0x00ff00)
+            emb = discord.Embed(title='Your ass got clapped {}'.format(user.name) , description='{}'.format(user.mention) , color=0x0d67d6)
             emb.set_image(url="https://media.discordapp.net/attachments/755342614345154631/1051217269302251591/70f07075-4b06-4c7d-ab49-abe737c0ddd7.gif")
             await message.channel.send(embed=emb)
 
@@ -105,5 +110,8 @@ async def clapass(message):
             await message.reply('Cannot mention everyone !')
     else:
         await message.reply('Could Not clap the User')
+
+
+#create embed for $help stop using $command
 
 client.run(Token)
