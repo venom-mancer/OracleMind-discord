@@ -112,6 +112,12 @@ async def clapass(message):
         await message.reply('Could Not clap the User')
 
 
-#create embed for $help stop using $command
-#add count servers $svcount
+
+#counts in how many servers Oraclemind is running
+@client.command()
+async def svcount(message):
+
+    await message.reply('success , bot is running on {} servers'.format(len(client.guilds)))
+
+
 client.run(Token)
