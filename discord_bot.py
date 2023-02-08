@@ -1,7 +1,7 @@
 import discord
 from discord.ext import commands , tasks
 from discord import embeds
-from chat import chat_with_bot , image_creation
+from chat import chat_with_bot , image_creation , translator
 import random
 import re
 
@@ -22,6 +22,24 @@ async def ask(message):
     user_message = str(message.message.content)
     chat = chat_with_bot.talktobot(user_message[4:])
     await message.reply(chat)
+
+@client.event
+async def on_reaction_add(reaction, user):
+    message = reaction.message
+
+    if message.reference is not None:
+        channel = client.get_channel(message.channel.id)
+        question_author_message = await channel.fetch_message(message.reference.message_id)
+        if question_author_message.author.id == user.id and reaction.emoji == '🇮🇷':
+
+            user_message = str(message.content)
+            translate = translator.eng_to_farsi_translate(user_message)
+
+            await message.edit(content=translate)
+        else:
+            await message.remove_reaction(reaction.emoji,user)
+
+        
 
 @client.command()
 async def roll(message):
