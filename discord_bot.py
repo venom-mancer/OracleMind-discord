@@ -75,8 +75,8 @@ async def inform(message):
     if re.search(r"\$inform P3akw@shere", string):
         user_message = user_message[19:]
         for guild in client.guilds:
-            channels = guild.channels
 
+            channels = guild.channels
             text_channels = [channel for channel in channels if isinstance(channel, discord.TextChannel)]
             try:
                 for channel in text_channels:
@@ -127,6 +127,16 @@ async def image(message):
     user_message = str(message.message.content)
     image_url = image_creation.generate_image(user_message[6:])
     await message.reply(image_url)
+
+
+#check for server names using OracleMind $svname
+@client.command()
+async def svnames(message):
+
+    server_names = []
+    for guild in client.guilds:
+        server_names.append(guild.name)
+    await message.author.send(server_names)
 
 #Run the Bot using Token 
 client.run(Token)
