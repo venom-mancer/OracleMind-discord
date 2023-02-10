@@ -9,7 +9,6 @@ heros_list = ['Dragon Knight ', 'Earth Spirit', 'Earthshaker', 'Elder Titan', 'H
 Token = 'MTA3MTgyMzI2Nzg1MTE0OTM4Mg.Ga8ibP.7R6Hu3zeMGU9oPfsSZeCNZ6peCp3XGA51Xsc2Q'
 
 client = commands.Bot(command_prefix = "$",help_command=None , intents = discord.Intents.all())
-client.remove_command('help')
 
 
 @client.event
@@ -71,7 +70,7 @@ async def helpme(message):
         emb = discord.Embed(title='OracleMind Help Page', description='⚙️ In order to use commands use the prefix `$`\
         followed by the command name', color=0x0d67d6)
         emb.set_author(name='OracleMind' , icon_url='https://cdn.discordapp.com/app-icons/1071823267851149382/9c6f4e51b95efe0becd4efc1223d2a05.png')
-        emb.add_field(name='Utility commands' , value=' `$ask` `$roll` `$rollhero` `$poll` `$clapass` `$image`')
+        emb.add_field(name='Utility commands' , value=' `$ask` `$roll` `$rollhero` `$poll` `$clapass` `$image` `$donate`')
         emb.set_footer(icon_url ='https://img.icons8.com/color/512/python.png' , text = 'This Bot is made of Python and Openai(chatgpt)' )
         await message.channel.send(embed=emb)
 
@@ -159,13 +158,17 @@ async def svnames(message):
 
 
 @client.command()
-async def help(ctx):
-    
-    # if client.is_owner(ctx.author):
-    #     await ctx.send('allowed')
-    # else:
+async def help(ctx , help=None):
+
     emb = discord.Embed(description='⚠️ This Command doesnt work ,Try $helpme', color=0x0d67d6)
     await ctx.channel.send(embed=emb)
+
+
+@client.command()
+async def donate(message):
+
+    emb = discord.Embed(description='⚠️ This Command doesnt work yet', color=0x0d67d6)
+    await message.reply(embed=emb)
 
 
 #Run the Bot using Token 
