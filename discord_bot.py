@@ -183,8 +183,17 @@ async def help(ctx):
 @client.command()
 async def donate(message):
 
-    emb = discord.Embed(description='⚠️ This Command doesnt work yet', color=0x0d67d6)
-    await message.reply(embed=emb)
+    user_message = str(message.message.content)
+    if user_message == '$donate':
+        emb = discord.Embed(title='Crypto Donation', description='📥 In order to donate , Use of the\
+        following ways', color=0x0d67d6)
+        emb.set_author(name='OracleMind' , icon_url='https://cdn.discordapp.com/app-icons/1071823267851149382/9c6f4e51b95efe0becd4efc1223d2a05.png')
+        emb.add_field(name='Tether (TRC20)' , value='TYESPZQMD31oU6bpgPQNbXizYhmhRiYMeC')
+        emb.add_field(name='Cardano (Coin)' , value='addr1q9q378deyvt529zpp0nne5rv8fs5dzadcum7pcfzvgv8ll6v20ax8vff6gku6lej06vx0zx07jxen3m9g6tckevvctuqdmz38v')
+        emb.add_field(name='USD COIN (TRC20)' , value='TYESPZQMD31oU6bpgPQNbXizYhmhRiYMeC')
+        emb.add_field(name='XRP (Coin)' , value='rao3Wec9zGwVDVn6g6RQbMR8ycBP1bA2QA')
+        emb.set_footer(icon_url ='https://cdn.discordapp.com/attachments/1071841070977126420/1074419988284309544/generic-cryptocurrency-icon-512x508-icecu3wp.png' , text = 'Glad Youre on This Page 👀' )
+        await message.channel.send(embed=emb)
 
 
 #Run the Bot using Token 
