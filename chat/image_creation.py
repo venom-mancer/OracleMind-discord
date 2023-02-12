@@ -16,6 +16,6 @@ def generate_image(text):
         size="1024x1024"
         )
     except Exception as error:
-                return 'Failed to generate image'
-    return response['data'][0]['url']
+        return error.user_message,1
+    return response['data'][0]['url'],2
 

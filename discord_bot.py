@@ -146,7 +146,15 @@ async def image(message):
 
     user_message = str(message.message.content)
     image_url = image_creation.generate_image(user_message[6:])
-    await message.reply(image_url)
+    
+    if image_url[1] == 1:
+        emb = discord.Embed(title=image_url[0], color=0x0d67d6)
+        emb.set_image(url="https://media.discordapp.net/attachments/915659599045075025/936386591524544592/20220128_015424.gif")
+        await message.channel.send(embed=emb)
+
+    elif image_url[0] == 2:
+
+        await message.reply(image_url)
 
 
 #check for server names using OracleMind $svname
