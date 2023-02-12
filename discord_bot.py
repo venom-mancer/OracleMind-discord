@@ -21,9 +21,13 @@ async def on_ready():
 @client.command()
 async def ask(message):
 
-    user_message = str(message.message.content)
-    chat = chat_with_bot.talktobot(user_message[4:])
-    await message.reply(chat)
+    if user_message == '$ask':
+        emb = discord.Embed(description='⚠️ $ask requires a question after $ask command', color=0x0d67d6)
+        await message.channel.send(embed=emb)
+    else:
+        user_message = str(message.message.content)
+        chat = chat_with_bot.talktobot(user_message[4:])
+        await message.reply(chat)
 
 @client.event
 async def on_reaction_add(reaction, user):
@@ -59,7 +63,8 @@ async def rollhero(message):
 
     user_message = str(message.message.content)
     if user_message != '$rollhero':
-        await message.reply('rollhero works with a simple command $rollhero Which it gives you a random hero to play a game with')
+        emb = discord.Embed(description='⚠️ $rollhero doenst require anymore input - just use $rollhero', color=0x0d67d6)
+        await message.channel.send(embed=emb)
     else:
         random_hero = random.choice(heros_list)
         await message.reply("Its Time to Play {} , I challenge you :)".format(random_hero))
