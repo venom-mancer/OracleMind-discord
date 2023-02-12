@@ -152,9 +152,9 @@ async def image(message):
         emb.set_image(url="https://media.discordapp.net/attachments/915659599045075025/936386591524544592/20220128_015424.gif")
         await message.channel.send(embed=emb)
 
-    elif image_url[0] == 2:
+    elif image_url[1] == 2:
 
-        await message.reply(image_url)
+        await message.reply(image_url[0])
 
 
 #check for server names using OracleMind $svname
