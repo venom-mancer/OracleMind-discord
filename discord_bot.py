@@ -191,6 +191,7 @@ async def donate(message):
         emb.add_field(name='Tether (TRC20)' , value='TYESPZQMD31oU6bpgPQNbXizYhmhRiYMeC')
         emb.add_field(name='Cardano (Coin)' , value='addr1q9q378deyvt529zpp0nne5rv8fs5dzadcum7pcfzvgv8ll6v20ax8vff6gku6lej06vx0zx07jxen3m9g6tckevvctuqdmz38v')
         emb.add_field(name='USD COIN (TRC20)' , value='TYESPZQMD31oU6bpgPQNbXizYhmhRiYMeC')
+        emb.add_field(name='TRON (COIN)' , value='TYESPZQMD31oU6bpgPQNbXizYhmhRiYMeC')
         emb.add_field(name='XRP (Coin)' , value='rao3Wec9zGwVDVn6g6RQbMR8ycBP1bA2QA')
         emb.set_footer(icon_url ='https://cdn.discordapp.com/attachments/1071841070977126420/1074419988284309544/generic-cryptocurrency-icon-512x508-icecu3wp.png' , text = 'Glad Youre on This Page 👀' )
         await message.channel.send(embed=emb)
