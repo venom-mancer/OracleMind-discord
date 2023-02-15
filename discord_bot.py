@@ -72,7 +72,7 @@ async def helpme(message):
         emb = discord.Embed(title='OracleMind Help Page', description='⚙️ In order to use commands use the prefix `$`\
         followed by the command name', color=0x0d67d6)
         emb.set_author(name='OracleMind' , icon_url='https://cdn.discordapp.com/app-icons/1071823267851149382/9c6f4e51b95efe0becd4efc1223d2a05.png')
-        emb.add_field(name='Utility commands' , value=' `$ask` `$roll` `$rollhero` `$poll` `$clapass` `$image` `$donate`')
+        emb.add_field(name='Utility commands' , value=' `$ask` `$roll` `$rollhero` `$poll` `$image` `$donate`')
         emb.set_footer(icon_url ='https://img.icons8.com/color/512/python.png' , text = 'This Bot is made of Python and Openai(chatgpt)' )
         await message.channel.send(embed=emb)
 
