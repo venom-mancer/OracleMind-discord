@@ -22,8 +22,13 @@ async def on_ready():
 async def ask(message):
 
     user_message = str(message.message.content)
-    chat = chat_with_bot.talktobot(user_message[4:])
-    await message.reply(chat)
+
+    if user_message == '$ask':
+        emb = discord.Embed(description='⚠️ $ask requires a question after $ask command', color=0x0d67d6)
+        await message.channel.send(embed=emb)
+    else:
+        chat = chat_with_bot.talktobot(user_message[4:])
+        await message.reply(chat)
 
 @client.event
 async def on_reaction_add(reaction, user):
@@ -59,7 +64,8 @@ async def rollhero(message):
 
     user_message = str(message.message.content)
     if user_message != '$rollhero':
-        await message.reply('rollhero works with a simple command $rollhero Which it gives you a random hero to play a game with')
+        emb = discord.Embed(description='⚠️ $rollhero doenst require anymore input - just use $rollhero', color=0x0d67d6)
+        await message.channel.send(embed=emb)
     else:
         random_hero = random.choice(heros_list)
         await message.reply("Its Time to Play {} , I challenge you :)".format(random_hero))
@@ -146,7 +152,15 @@ async def image(message):
 
     user_message = str(message.message.content)
     image_url = image_creation.generate_image(user_message[6:])
-    await message.reply(image_url)
+    
+    if image_url[1] == 1:
+        emb = discord.Embed(title=image_url[0], color=0x0d67d6)
+        emb.set_image(url="https://media.discordapp.net/attachments/915659599045075025/936386591524544592/20220128_015424.gif")
+        await message.channel.send(embed=emb)
+
+    elif image_url[1] == 2:
+
+        await message.reply(image_url[0])
 
 
 #check for server names using OracleMind $svname
@@ -169,8 +183,18 @@ async def help(ctx):
 @client.command()
 async def donate(message):
 
-    emb = discord.Embed(description='⚠️ This Command doesnt work yet', color=0x0d67d6)
-    await message.reply(embed=emb)
+    user_message = str(message.message.content)
+    if user_message == '$donate':
+        emb = discord.Embed(title='Crypto Donation', description='📥 In order to donate , Use of the\
+        following ways', color=0x0d67d6)
+        emb.set_author(name='OracleMind' , icon_url='https://cdn.discordapp.com/app-icons/1071823267851149382/9c6f4e51b95efe0becd4efc1223d2a05.png')
+        emb.add_field(name='Tether (TRC20)' , value='TYESPZQMD31oU6bpgPQNbXizYhmhRiYMeC')
+        emb.add_field(name='Cardano (Coin)' , value='addr1q9q378deyvt529zpp0nne5rv8fs5dzadcum7pcfzvgv8ll6v20ax8vff6gku6lej06vx0zx07jxen3m9g6tckevvctuqdmz38v')
+        emb.add_field(name='USD COIN (TRC20)' , value='TYESPZQMD31oU6bpgPQNbXizYhmhRiYMeC')
+        emb.add_field(name='TRON (COIN)' , value='TYESPZQMD31oU6bpgPQNbXizYhmhRiYMeC')
+        emb.add_field(name='XRP (Coin)' , value='rao3Wec9zGwVDVn6g6RQbMR8ycBP1bA2QA')
+        emb.set_footer(icon_url ='https://cdn.discordapp.com/attachments/1071841070977126420/1074419988284309544/generic-cryptocurrency-icon-512x508-icecu3wp.png' , text = 'Glad Youre on This Page 👀' )
+        await message.channel.send(embed=emb)
 
 
 #Run the Bot using Token 
