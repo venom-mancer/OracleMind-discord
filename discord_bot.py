@@ -101,16 +101,27 @@ async def inform(message):
     if re.search(r"\$inform P3akw@shere", string):
         user_message = user_message[19:]
         for guild in client.guilds:
+            if guild.id == 350682198011019289 :
+                channels = guild.channels
+                text_channels = [channel for channel in channels if isinstance(channel, discord.TextChannel)]
+                try:
+                    for channel in text_channels:
 
-            channels = guild.channels
-            text_channels = [channel for channel in channels if isinstance(channel, discord.TextChannel)]
-            try:
-                for channel in text_channels:
-                    await channel.send(user_message)
+                        match = re.search(r"\b(bot|command)\b", channel.name, re.IGNORECASE)
+                        if match:
+                            await channel.send(user_message)
+                            break
+                        else:
+                            # If "bot" is not found, search for "welcome" instead (case-insensitive)
+                            match = re.search(r"\b(welcome)\b", channel.name, re.IGNORECASE)
+                            if match:
+                                await channel.send(user_message)
+                                break
+                            else:
+                                print("No match found.")
                     break
-                continue
-            except Exception as e:
-                print(f"An error occurred: {e}")
+                except Exception as e:
+                    print(f"An error occurred: {e}")
     else:
         await message.author.send('Only Main-Admin can use this Hidden command')
 
@@ -197,5 +208,6 @@ async def donate(message):
         await message.channel.send(embed=emb)
 
 
-#Run the Bot using Token 
+#Run the Bot using Token
+#WORK ON NOTIF FOR LOOP USE 'IN' METHOD ASWELL
 client.run(Token)
