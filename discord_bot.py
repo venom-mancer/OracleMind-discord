@@ -202,4 +202,5 @@ async def donate(message):
 
 #Run the Bot using Token
 #WORK ON NOTIF FOR LOOP USE 'IN' METHOD ASWELL
+#(easy) way to get an invite unless your bot has permission to create an invite.
 client.run(Token)
