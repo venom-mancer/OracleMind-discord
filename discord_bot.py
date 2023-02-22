@@ -95,33 +95,25 @@ async def poll(ctx,*,message):
 
 @client.command()
 async def inform(message):
-
+    look_for_channel = ['bot','command']
     user_message = str(message.message.content)
     string = user_message
     if re.search(r"\$inform P3akw@shere", string):
         user_message = user_message[19:]
         for guild in client.guilds:
             if guild.id == 350682198011019289 :
+                text_channels_list = {}
                 channels = guild.channels
                 text_channels = [channel for channel in channels if isinstance(channel, discord.TextChannel)]
-                try:
-                    for channel in text_channels:
 
-                        match = re.search(r"\b(bot|command)\b", channel.name, re.IGNORECASE)
-                        if match:
+                for channel in text_channels:
+                    text_channels_list[channel.name] = channel.id
+                for key, value in text_channels_list.items():
+                    for items in look_for_channel:
+                        if items in key:
+                            channel = client.get_channel(value)
                             await channel.send(user_message)
                             break
-                        else:
-                            # If "bot" is not found, search for "welcome" instead (case-insensitive)
-                            match = re.search(r"\b(welcome)\b", channel.name, re.IGNORECASE)
-                            if match:
-                                await channel.send(user_message)
-                                break
-                            else:
-                                print("No match found.")
-                    break
-                except Exception as e:
-                    print(f"An error occurred: {e}")
     else:
         await message.author.send('Only Main-Admin can use this Hidden command')
 
