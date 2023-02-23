@@ -170,9 +170,9 @@ async def image(message):
 @client.command()
 async def svnames(message):
 
-    server_names = []
+    server_names = {}
     for guild in client.guilds:
-        server_names.append(guild.name)
+        server_names[guild.name] = ' : ' + guild.id
     await message.author.send(server_names)
 
 
