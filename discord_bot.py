@@ -172,7 +172,7 @@ async def svnames(message):
 
     server_names = {}
     for guild in client.guilds:
-        server_names[guild.name] = ' : ' + guild.id
+        server_names[guild.name] = ' : ' + str(guild.id)
     await message.author.send(server_names)
 
 
