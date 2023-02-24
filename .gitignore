@@ -91,7 +91,6 @@ target/
 # IPython
 profile_default/
 ipython_config.py
-config.py
 # pyenv
 .python-version
 
@@ -110,6 +109,7 @@ venv/
 ENV/
 env.bak/
 venv.bak/
+config.json
 
 # Spyder project settings
 .spyderproject

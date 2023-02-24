@@ -1,11 +1,11 @@
 import openai
-from configparser import ConfigParser
+import json
 
+with open('config.json') as user_file:
+  file_contents = user_file.read()
+parsed_json = json.loads(file_contents)
 
-config = ConfigParser()
-config.read('config.ini')
-
-openai.api_key = config['credits']['open_ai_token']
+openai.api_key = parsed_json["open_ai_token"]
 openai.Model.list()
 
 
