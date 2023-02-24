@@ -1,5 +1,5 @@
 # OracleMind-discord
-This bot wont work unless you have the config.ini
+This bot wont work unless you have the `config.ini`
 
 # installations 
 install all the required modules from the `requirement.txt`
