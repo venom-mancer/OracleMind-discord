@@ -103,6 +103,7 @@ celerybeat-schedule
 
 # Environments
 .env
+.ini
 .venv
 env/
 venv/

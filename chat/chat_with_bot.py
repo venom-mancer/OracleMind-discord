@@ -1,6 +1,11 @@
 import openai
+from configparser import ConfigParser
 
-openai.api_key = "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"
+
+config = ConfigParser()
+config.read('config.ini')
+
+openai.api_key = config['credits']['open_ai_token']
 openai.Model.list()
 
 
