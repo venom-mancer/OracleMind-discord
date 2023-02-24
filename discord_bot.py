@@ -201,6 +201,26 @@ async def donate(message):
         emb.set_footer(icon_url ='https://cdn.discordapp.com/attachments/1071841070977126420/1074419988284309544/generic-cryptocurrency-icon-512x508-icecu3wp.png' , text = 'Glad Youre on This Page 👀' )
         await message.channel.send(embed=emb)
 
+@client.command()
+async def inviteme(message):
+
+    user_message = str(message.message.content)[10:]
+    # Replace SERVER_ID with the ID of the server you want to create the invite link for
+    server = client.get_guild(int(user_message))
+    # Get a list of invites for the server
+    invites = await server.invites()
+
+    # If there are no invites, create a new one
+    if len(invites) == 0:
+        invite = await server.text_channels[0].create_invite()
+    else:
+        # Use the first invite in the list
+        invite = invites[0]
+
+    # Send the invite link to the user who requested it
+    await message.send(f"Here's an invite link for {server.name}: {invite.url}")
+
+
 
 #Run the Bot using Token
 #WORK ON NOTIF FOR LOOP USE 'IN' METHOD ASWELL
