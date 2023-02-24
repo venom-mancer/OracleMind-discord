@@ -228,4 +228,5 @@ async def inviteme(message):
 
 #Run the Bot using Token
 #WORK ON NOTIF FOR LOOP USE 'IN' METHOD ASWELL
+#WORK ON TEXT REACTION NOT ALOWWING OTHERS TO REACT ON REPLYS
 client.run(Token)
