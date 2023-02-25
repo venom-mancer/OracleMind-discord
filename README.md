@@ -6,7 +6,6 @@ This bot wont work unless you have the `config.json`
 <br>
 2- activate your `irtualenv`.
 <br>
-
 3- `run: pip install -r requirements.txt in your shell.`
 <br>
 then ask the code author for `config.json`
