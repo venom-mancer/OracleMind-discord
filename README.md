@@ -6,7 +6,7 @@ This bot wont work unless you have the `config.json`
 <br>
 2- activate your `virtualenv`.
 <br>
-3- `run: pip install -r requirements.txt in your shell.`
+3- run: `pip install -r requirements.txt` in your shell.
 <br>
 # config file
 1- ask the code author for `config.json`
