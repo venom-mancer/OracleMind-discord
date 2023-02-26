@@ -5,7 +5,7 @@ This bot is currently running on Discord
 
 # installations 
 * info : This bot wont work unless you have the `config.json` , so i recommend you ask me for the `config.json`
-<br>
+
 1- cd to the directory where `requirements.txt` is located
 <br>
 2- activate your `virtualenv`.
