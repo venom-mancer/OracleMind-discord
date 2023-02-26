@@ -1,7 +1,7 @@
 # OracleMind-discord
 This bot is currently running on Discord
 <br>
-* URL : * https://discord.com/oauth2/authorize?client_id=1071823267851149382&permissions=1634235578432&scope=bot%20applications.commands
+* URL :  https://discord.com/oauth2/authorize?client_id=1071823267851149382&permissions=1634235578432&scope=bot%20applications.commands
 
 # installations 
 info : This bot wont work unless you have the `config.json`
