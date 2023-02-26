@@ -12,7 +12,7 @@ This bot is currently running on Discord
 <br>
 3- run: `pip install -r requirements.txt` in your shell.
 <br>
-# config file #0969DA
+# config file `#0969DA`
 1- ask the code author for `config.json`
 <br>
 2- after having the `config.json` put it in the root of the bot directory next to `discord_bot.py`
