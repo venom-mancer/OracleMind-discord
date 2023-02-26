@@ -1,7 +1,11 @@
 # OracleMind-discord
-This bot wont work unless you have the `config.json`
+This bot is currently running on Discord
+<br>
+** URL : ** https://discord.com/oauth2/authorize?client_id=1071823267851149382&permissions=1634235578432&scope=bot%20applications.commands
 
 # installations 
+info : This bot wont work unless you have the `config.json`
+<br>
 1- cd to the directory where `requirements.txt` is located
 <br>
 2- activate your `virtualenv`.
