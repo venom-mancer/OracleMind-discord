@@ -231,4 +231,5 @@ async def inviteme(message):
 
 #Run the Bot using Token
 #WORK ON NOTIF FOR LOOP USE 'IN' METHOD ASWELL
+#response back permison denied in inviteme func
 client.run(Token)
