@@ -190,7 +190,7 @@ async def svnames(message):
 
         with open(filename, "w") as f:
             for guild in client.guilds:
-                f.write("{} : {}".format(guild.name,guild.id))
+                f.write("{} : {} \n".format(guild.name,guild.id))
         with open(filename, 'rb') as result_file:
                 file = discord.File(result_file)
 
