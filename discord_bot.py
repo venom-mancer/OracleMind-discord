@@ -213,19 +213,22 @@ async def inviteme(message):
 
     user_message = str(message.message.content)[10:]
     # Replace SERVER_ID with the ID of the server you want to create the invite link for
-    server = client.get_guild(int(user_message))
-    # Get a list of invites for the server
-    invites = await server.invites()
+    try:
+        server = client.get_guild(int(user_message))
+        # Get a list of invites for the server
+        invites = await server.invites()
 
-    # If there are no invites, create a new one
-    if len(invites) == 0:
-        invite = await server.text_channels[0].create_invite()
-    else:
-        # Use the first invite in the list
-        invite = invites[0]
+        # If there are no invites, create a new one
+        if len(invites) == 0:
+            invite = await server.text_channels[0].create_invite()
+        else:
+            # Use the first invite in the list
+            invite = invites[0]
 
-    # Send the invite link to the user who requested it
-    await message.send(f"Here's an invite link for {server.name}: {invite.url}")
+        # Send the invite link to the user who requested it
+        await message.send(f"Here's an invite link for {server.name}: {invite.url}")
+    except Exception as error:
+        await message.send(f"Here's an invite link for {error}")
 
 
 
