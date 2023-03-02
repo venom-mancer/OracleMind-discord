@@ -1,9 +1,14 @@
 import requests
 from requests.structures import CaseInsensitiveDict
 import openai
+import json
+
+with open('config.json') as user_file:
+  file_contents = user_file.read()
+parsed_json = json.loads(file_contents)
 
 QUERY_URL = "https://api.openai.com/v1/images/generations"
-api_key = "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"
+api_key = parsed_json["open_ai_token"]
 
 def generate_image(text):
 
