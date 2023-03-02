@@ -228,7 +228,7 @@ async def inviteme(message):
         # Send the invite link to the user who requested it
         await message.send(f"Here's an invite link for {server.name}: {invite.url}")
     except Exception as error:
-        await message.send(f"Here's an invite link for {error}")
+        await message.send(f"{error}")
 
 
 
