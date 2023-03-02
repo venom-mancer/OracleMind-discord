@@ -47,6 +47,7 @@ MANIFEST
 
 # Installer logs
 pip-log.txt
+svnames.txt
 chat-log.txt
 pip-delete-this-directory.txt
 

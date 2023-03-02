@@ -185,10 +185,15 @@ async def image(message):
 @client.command()
 async def svnames(message):
 
-    server_names = {}
-    for guild in client.guilds:
-        server_names[guild.name] = ' : ' + str(guild.id)
-    await message.author.send(server_names)
+    filename = "svnames.txt"
+    with open(filename, "w") as f:
+        for guild in client.guilds:
+            f.write("{} : {}".format(guild.name,guild.id))
+    with open(filename, 'rb') as result_file:
+            file = discord.File(result_file)
+
+    await message.channel.send(file=file)
+    file.close()
 
 
 @client.command()
