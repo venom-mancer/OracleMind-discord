@@ -186,14 +186,19 @@ async def image(message):
 async def svnames(message):
 
     filename = "svnames.txt"
-    with open(filename, "w") as f:
-        for guild in client.guilds:
-            f.write("{} : {}".format(guild.name,guild.id))
-    with open(filename, 'rb') as result_file:
-            file = discord.File(result_file)
+    if  str(message.author.id) == parsed_json["admin"]:
 
-    await message.channel.send(file=file)
-    file.close()
+        with open(filename, "w") as f:
+            for guild in client.guilds:
+                f.write("{} : {}".format(guild.name,guild.id))
+        with open(filename, 'rb') as result_file:
+                file = discord.File(result_file)
+
+        await message.channel.send(file=file)
+        file.close()
+    else:
+        emb = discord.Embed(description='⚠️ You Dont have the Permission for this command', color=0x0d67d6)
+        await message.channel.send(embed=emb)
 
 
 @client.command()
