@@ -154,8 +154,12 @@ async def clapass(message):
 #counts in how many servers Oraclemind is running
 @client.command()
 async def svcount(message):
+    if  str(message.author.id) == parsed_json["admin"]:
 
-    await message.reply('success , bot is running on {} servers'.format(len(client.guilds)))
+        await message.reply('success , bot is running on {} servers'.format(len(client.guilds)))
+    else:
+        emb = discord.Embed(description='⚠️ You Dont have the Permission for this command', color=0x0d67d6)
+        await message.channel.send(embed=emb)
 
 
 #create image $image
@@ -213,26 +217,31 @@ async def inviteme(message):
 
     user_message = str(message.message.content)[10:]
     # Replace SERVER_ID with the ID of the server you want to create the invite link for
-    try:
-        server = client.get_guild(int(user_message))
-        # Get a list of invites for the server
-        invites = await server.invites()
+    # gets admin user id from json file and check if the user_massage is admin
+    if  str(message.author.id) == parsed_json["admin"]:
 
-        # If there are no invites, create a new one
-        if len(invites) == 0:
-            invite = await server.text_channels[0].create_invite()
-        else:
-            # Use the first invite in the list
-            invite = invites[0]
+        try:
+            server = client.get_guild(int(user_message))
+            # Get a list of invites for the server
+            invites = await server.invites()
 
-        # Send the invite link to the user who requested it
-        await message.send(f"Here's an invite link for {server.name}: {invite.url}")
-    except Exception as error:
-        await message.send(f"{error}")
+            # If there are no invites, create a new one
+            if len(invites) == 0:
+                invite = await server.text_channels[0].create_invite()
+            else:
+                # Use the first invite in the list
+                invite = invites[0]
+
+            # Send the invite link to the user who requested it
+            await message.send(f"Here's an invite link for {server.name}: {invite.url}")
+        except Exception as error:
+            await message.send("Permission Denied !")
+    else:
+        emb = discord.Embed(description='⚠️ You Dont have the Permission for this command', color=0x0d67d6)
+        await message.channel.send(embed=emb)
 
 
 
 #Run the Bot using Token
 #WORK ON NOTIF FOR LOOP USE 'IN' METHOD ASWELL
-#response back permison denied in inviteme func
 client.run(Token)
