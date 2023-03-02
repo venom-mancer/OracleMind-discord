@@ -60,7 +60,8 @@ async def roll(message):
 
     user_message = str(message.message.content)[5:]
     if user_message == '':
-        await message.reply('roll works with 2 input numbers (beginning - End) ----> like roll 1-60')
+        emb = discord.Embed(description='⚠️ $roll works with 2 input numbers (beginning - End) like $roll 1-60', color=0x0d67d6)
+        await message.channel.send(embed=emb)
     else:
         numbers = re.findall(r'\d+', user_message)
         roll_result = random.randint(int(numbers[0]),int(numbers[1]))
@@ -152,6 +153,7 @@ async def clapass(message):
 
 
 #counts in how many servers Oraclemind is running
+#if permission is not granted it wont work for you
 @client.command()
 async def svcount(message):
     if  str(message.author.id) == parsed_json["admin"]:
