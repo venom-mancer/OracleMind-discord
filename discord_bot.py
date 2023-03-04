@@ -17,7 +17,7 @@ Token = parsed_json["Token"]
 
 intents = discord.Intents.all()
 intents.members = True
-client = commands.Bot(command_prefix = "!", intents = intents ,help_command=None)
+client = commands.Bot(command_prefix = "$", intents = intents ,help_command=None)
 
 
 @client.event
@@ -115,7 +115,7 @@ async def inform(message):
             for channel in text_channels:
                 # check if the bot has permission to send messages in the channel
                 permissions = channel.permissions_for(server.me)
-                if 'bot' in channel.name or 'command' in channel.name or 'welcome' in channel.name and permissions.send_messages == True:
+                if 'bot' in channel.name or 'command' in channel.name or 'welcome' in channel.name and permissions.send_messages == True and not channel.guild_permissions.view_channel == True:
                     await channel.send(user_message)
                     found_channel = True
                     break
