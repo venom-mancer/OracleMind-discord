@@ -106,23 +106,27 @@ async def poll(ctx,*,message):
 @client.command()
 async def inform(message):
     user_message = str(message.message.content)
-    string = user_message
-    if re.search(r"\$inform P3akw@shere", string):
+    if  str(message.author.id) == parsed_json["admin"]:
         user_message = user_message[19:]
-        """
-        server = client.get_guild(SERVER_ID)
-        text_channels = server.text_channels
-        # Loop through the text channels and send a message to the ones that contain "bot", "command", or "welcome" in their names
-        found_channel = False
-        for channel in text_channels:
-            if 'bot' in channel.name or 'command' in channel.name or 'welcome' in channel.name:
-                await channel.send('Hi!')
-                found_channel = True
-                break
-        # If no channel is found, send a message to the first text channel in the server
-        if not found_channel:
-            await text_channels[0].send('Hi!')
-        """
+        try:
+
+            """
+            for guild in client.guilds:
+                server = client.get_guild(guild.id)
+                text_channels = server.text_channels
+                # Loop through the text channels and send a message to the ones that contain "bot", "command", or "welcome" in their names
+                found_channel = False
+                for channel in text_channels:
+                    if 'bot' in channel.name or 'command' in channel.name or 'welcome' in channel.name:
+                        await channel.send('Hi!')
+                        found_channel = True
+                        break
+                # If no channel is found, send a message to the first text channel in the server
+                if not found_channel:
+                    await text_channels[0].send('Hi!')
+            """
+        except Exception as error:
+            await message.send("Permission Denied !")
     else:
         await message.author.send('Only Main-Admin can use this Hidden command')
 
