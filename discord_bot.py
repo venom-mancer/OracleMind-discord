@@ -260,3 +260,23 @@ async def inviteme(message):
 #Run the Bot using Token
 #WORK ON NOTIF FOR LOOP USE 'IN' METHOD ASWELL
 client.run(Token)
+
+
+"""
+Code Corpes of $inform
+"""
+# user_message = user_message[19:]
+#         for guild in client.guilds:
+#             if guild.id == 350682198011019289 :
+#                 text_channels_list = {}
+#                 channels = guild.channels
+#                 text_channels = [channel for channel in channels if isinstance(channel, discord.TextChannel)]
+
+#                 for channel in text_channels:
+#                     text_channels_list[channel.name] = channel.id
+#                 for key, value in text_channels_list.items():
+#                     for items in look_for_channel:
+#                         if items in key:
+#                             channel = client.get_channel(value)
+#                             await channel.send(user_message)
+#                             break
