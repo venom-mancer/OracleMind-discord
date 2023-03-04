@@ -17,7 +17,7 @@ Token = parsed_json["Token"]
 
 intents = discord.Intents.all()
 intents.members = True
-client = commands.Bot(command_prefix = "$", intents = intents ,help_command=None)
+client = commands.Bot(command_prefix = "!", intents = intents ,help_command=None)
 
 
 @client.event
@@ -107,26 +107,22 @@ async def poll(ctx,*,message):
 async def inform(message):
     user_message = str(message.message.content)
     if  str(message.author.id) == parsed_json["admin"]:
-        user_message = user_message[19:]
-        try:
-
-            """
-            for guild in client.guilds:
-                server = client.get_guild(guild.id)
-                text_channels = server.text_channels
-                # Loop through the text channels and send a message to the ones that contain "bot", "command", or "welcome" in their names
-                found_channel = False
-                for channel in text_channels:
-                    if 'bot' in channel.name or 'command' in channel.name or 'welcome' in channel.name:
-                        await channel.send('Hi!')
-                        found_channel = True
-                        break
-                # If no channel is found, send a message to the first text channel in the server
-                if not found_channel:
-                    await text_channels[0].send('Hi!')
-            """
-        except Exception as error:
-            await message.send("Permission Denied !")
+        user_message = user_message[8:]
+        for guild in client.guilds:
+            server = client.get_guild(guild.id)
+            text_channels = server.text_channels
+            found_channel = False
+            for channel in text_channels:
+                # check if the bot has permission to send messages in the channel
+                permissions = channel.permissions_for(server.me)
+                if 'bot' in channel.name or 'command' in channel.name or 'welcome' in channel.name and permissions.send_messages == True:
+                    await channel.send('Hi!')
+                    found_channel = True
+                    break
+            if not found_channel:
+                await text_channels[0].send('Hi!')
+            else:
+                pass
     else:
         await message.author.send('Only Main-Admin can use this Hidden command')
 
@@ -258,25 +254,4 @@ async def inviteme(message):
 
 
 #Run the Bot using Token
-#WORK ON NOTIF FOR LOOP USE 'IN' METHOD ASWELL
 client.run(Token)
-
-
-"""
-Code Corpes of $inform
-"""
-# user_message = user_message[19:]
-#         for guild in client.guilds:
-#             if guild.id == 350682198011019289 :
-#                 text_channels_list = {}
-#                 channels = guild.channels
-#                 text_channels = [channel for channel in channels if isinstance(channel, discord.TextChannel)]
-
-#                 for channel in text_channels:
-#                     text_channels_list[channel.name] = channel.id
-#                 for key, value in text_channels_list.items():
-#                     for items in look_for_channel:
-#                         if items in key:
-#                             channel = client.get_channel(value)
-#                             await channel.send(user_message)
-#                             break
