@@ -115,11 +115,11 @@ async def inform(message):
             for channel in text_channels:
                 # check if the bot has permission to send messages in the channel
                 permissions = channel.permissions_for(server.me)
-                if 'bot' in channel.name or 'command' in channel.name or 'welcome' in channel.name and permissions.send_messages == True and not channel.guild_permissions.view_channel == True:
+                if 'bot' in channel.name or 'command' in channel.name or 'welcome' in channel.name or 'general' in channel.name and permissions.send_messages == True:
                     await channel.send(user_message)
                     found_channel = True
                     break
-            if not found_channel:
+            if not found_channel and permissions.send_messages == True:
                 await text_channels[0].send(user_message)
             else:
                 pass
