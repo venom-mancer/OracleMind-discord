@@ -121,6 +121,7 @@ async def inform(message):
                     break
                 if not found_channel and permissions.send_messages:
                     await channel.send(user_message)
+                    break
                 else:
                     pass
     else:
