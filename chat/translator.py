@@ -1,6 +1,8 @@
 import googletrans
 from googletrans import Translator
 
+supported_lang = ['fa','ru','de']
+
 def eng_to_farsi_translate(text):
 
     translator = Translator()
