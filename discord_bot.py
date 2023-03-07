@@ -119,10 +119,10 @@ async def inform(message):
                     await channel.send(user_message)
                     found_channel = True
                     break
-            if not found_channel and permissions.send_messages == True:
-                await text_channels[0].send(user_message)
-            else:
-                pass
+                if not found_channel and permissions.send_messages:
+                    await channel.send(user_message)
+                else:
+                    pass
     else:
         await message.author.send('Only Main-Admin can use this Hidden command')
 
@@ -255,3 +255,5 @@ async def inviteme(message):
 
 #Run the Bot using Token
 client.run(Token)
+
+#add german and russian traslator to bot
