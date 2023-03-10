@@ -256,5 +256,3 @@ async def inviteme(message):
 
 #Run the Bot using Token
 client.run(Token)
-
-#add german and russian traslator to bot
