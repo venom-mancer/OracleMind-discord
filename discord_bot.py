@@ -242,19 +242,21 @@ async def inviteme(message):
         emb = discord.Embed(description='⚠️ You Dont have the Permission for this command', color=0x0d67d6)
         await message.channel.send(embed=emb)
 
-
+#player stats by their ID
 @client.command()
 async def player(message):
 
     user_message = str(message.message.content)[7:]
     playerinfo = await dota2_openapi.playerinfo(user_message)
     
+    #reading from json file that was made in dota2 > dota2_openapi.py
     with open('match_result.json', 'r') as openfile:
     
         file_contents = openfile.read()
-    
+    #parsing and loading json
     parsed_json = json.loads(file_contents)
 
+    #seprating infos from json file
     highest_mmr =parsed_json[0]['mmr_estimate']['estimate']
     bestfriend = parsed_json[2][0]['personaname']
     winlose = parsed_json[1]["win"],parsed_json[1]["lose"]
@@ -262,6 +264,7 @@ async def player(message):
     avatarpfp = parsed_json[0]["profile"]['avatarfull']
     usersteamid = parsed_json[0]["profile"]['profileurl']
 
+    #embed and send
     emb = discord.Embed(title=personname, color=0x0d67d6)
     emb.set_author(name='Player Info ℹ️')
     emb.set_image(url='{}'.format(avatarpfp))
