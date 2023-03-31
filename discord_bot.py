@@ -2,6 +2,7 @@ import discord
 from discord.ext import commands , tasks
 from discord import embeds
 from chat import chat_with_bot , image_creation , translator
+from dota2 import dota2_openapi
 import json
 import random
 import re
@@ -12,7 +13,6 @@ with open('config.json') as user_file:
   
 parsed_json = json.loads(file_contents)
 
-heros_list = ['Dragon Knight ', 'Earth Spirit', 'Earthshaker', 'Elder Titan', 'Huskar', 'Io', 'Kunkka ', 'Legion Commander', 'Lifestealer', 'Lycan', 'Magnus', 'Marci', 'Mars', 'Night', ' Stalker', 'Omniknight', 'Phoenix', 'Primal Beast', 'Pudge', 'Sand King', 'Slardar', 'Snapfire', 'Spirit Breaker', 'Sven', 'Tidehunter', 'Timbersaw', 'Tiny', 'Treant Protector', 'Tusk', 'Underlord', 'Undying', 'Wraith King', 'Anti-Mage', 'Arc Warden', 'Bloodseeker', 'Bounty Hunter', 'Broodmother', 'Clinkz', 'Drow Ranger', 'Ember Spirit', 'Faceless Void', 'Gyrocopter', 'Hoodwink', 'Juggernaut', 'Lone Druid', 'Luna', 'Medusa', 'Meepo', 'Mirana', 'Monkey King', 'Morphling', 'Naga Siren', 'Nyx Assassin', 'Pangolier', 'Phantom Assassin', 'Phantom Lancer', 'Razor', 'Riki', 'Shadow Fiend', 'Slark', 'Sniper', 'Spectre', 'Templar Assassin', 'Terrorblade', 'Troll Warlord', 'Ursa', 'Vengeful Spirit', 'Venomancer', 'Viper', 'Weaver', 'Ancient Apparition', 'Bane', 'Batrider', 'Chen', 'Crystal Maiden', 'Dark Seer', 'Dark Willow', 'Dazzle', 'Death Prophet', 'Disruptor', 'Enchantress', 'Enigma', 'Grimstroke', 'Invoker', 'Jakiro', 'Keeper of the Light', 'Leshrac', 'Lich', 'Lina', 'Lion', 'Nature Prophet', 'Necrophos', 'Ogre Magi', 'Oracle', 'Outworld Destroyer', 'Puck', 'Pugna', 'Queen of Pain', 'Rubick', 'Shadow Demon', 'Shadow Shaman', 'Silencer', 'Skywrath Mage', 'Storm Spirit', 'Techies', 'Tinker', 'Visage', 'Void Spirit', 'Warlock', 'Windranger', 'Winter Wyvern', 'Witch Doctor', 'Zeus']
 Token = parsed_json["Token"]
 
 intents = discord.Intents.all()
@@ -67,16 +67,6 @@ async def roll(message):
         roll_result = random.randint(int(numbers[0]),int(numbers[1]))
         await message.reply(roll_result)
 
-@client.command()
-async def rollhero(message):
-
-    user_message = str(message.message.content)
-    if user_message != '$rollhero':
-        emb = discord.Embed(description='⚠️ $rollhero doenst require anymore input - just use $rollhero', color=0x0d67d6)
-        await message.channel.send(embed=emb)
-    else:
-        random_hero = random.choice(heros_list)
-        await message.reply("Its Time to Play {} , I challenge you :)".format(random_hero))
 
 @client.command()
 async def helpme(message):
@@ -86,7 +76,7 @@ async def helpme(message):
         emb = discord.Embed(title='OracleMind Help Page', description='⚙️ In order to use commands use the prefix `$`\
         followed by the command name', color=0x0d67d6)
         emb.set_author(name='OracleMind' , icon_url='https://cdn.discordapp.com/app-icons/1071823267851149382/9c6f4e51b95efe0becd4efc1223d2a05.png')
-        emb.add_field(name='Utility commands' , value=' `$ask` `$roll` `$rollhero` `$poll` `$image` `$donate` `$clapass`')
+        emb.add_field(name='Utility commands' , value=' `$ask` `$roll` `$poll` `$image` `$donate` `$clapass`')
         emb.add_field(name='$ask command' , value='After using $ask then you gotta ask a question or talk to the bot')
         emb.add_field(name='$image command' , value='After using $image then you gotta describe the image you want to be drawn')
         emb.set_footer(icon_url ='https://img.icons8.com/color/512/python.png' , text = 'This Bot is made of Python and Openai(chatgpt)' )
@@ -253,6 +243,11 @@ async def inviteme(message):
         await message.channel.send(embed=emb)
 
 
+@client.command()
+async def player(message):
+
+    user_message = str(message.message.content)[7:]
+    dota2_openapi.playerinfo(user_message)
 
 #Run the Bot using Token
 client.run(Token)
