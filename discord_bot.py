@@ -200,7 +200,7 @@ async def svnames(message):
         emb = discord.Embed(description='⚠️ You Dont have the Permission for this command', color=0x0d67d6)
         await message.channel.send(embed=emb)
 
-
+#disablled help command
 @client.command()
 async def help(ctx):
 
