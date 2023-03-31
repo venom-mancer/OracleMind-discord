@@ -247,7 +247,29 @@ async def inviteme(message):
 async def player(message):
 
     user_message = str(message.message.content)[7:]
-    dota2_openapi.playerinfo(user_message)
+    playerinfo = await dota2_openapi.playerinfo(user_message)
+    
+    with open('match_result.json', 'r') as openfile:
+    
+        file_contents = openfile.read()
+    
+    parsed_json = json.loads(file_contents)
+
+    highest_mmr =parsed_json[0]['mmr_estimate']['estimate']
+    bestfriend = parsed_json[2][0]['personaname']
+    winlose = parsed_json[1]["win"],parsed_json[1]["lose"]
+    personname = parsed_json[0]["profile"]['personaname']
+    avatarpfp = parsed_json[0]["profile"]['avatarfull']
+    usersteamid = parsed_json[0]["profile"]['profileurl']
+
+    emb = discord.Embed(title=personname, color=0x0d67d6)
+    emb.set_author(name='Player Info ℹ️')
+    emb.set_image(url='{}'.format(avatarpfp))
+    emb.add_field(name='Win/Lose' , value='{}'.format(winlose))
+    emb.add_field(name='highest MMR ' , value='{}'.format(highest_mmr))
+    emb.add_field(name='Best Friend' , value='{}'.format(bestfriend))
+    emb.add_field(name='Steam id URL' , value='{}'.format(usersteamid))
+    await message.channel.send(embed=emb)
 
 #Run the Bot using Token
 client.run(Token)
