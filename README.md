@@ -13,7 +13,7 @@ This bot is currently running on Discord
 3- run: `pip install -r requirements.txt` in your shell.
 <br>
 # config file
-create a `config.json` it should look like this :
+create a `config.json` and put in in main bot directory it should look like this :
 ```
 {
     "Token" : YOUR_BOT_TOKEN,
