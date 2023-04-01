@@ -13,8 +13,12 @@ This bot is currently running on Discord
 3- run: `pip install -r requirements.txt` in your shell.
 <br>
 # config file
-1- ask the code author for `config.json`
-<br>
-2- after having the `config.json` put it in the root of the bot directory next to `discord_bot.py`
-<br>
-Then youll be able to Run the project
+create a `config.json` and put in in main bot directory it should look like this :
+```
+{
+    "Token" : YOUR_BOT_TOKEN,
+    "open_ai_token" : CHATGPT_API,
+    "admin" : YOUR_DISCORD_ID
+       
+}
+```
