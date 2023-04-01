@@ -274,5 +274,6 @@ async def player(message):
     emb.add_field(name='Steam id URL' , value='{}'.format(usersteamid))
     await message.channel.send(embed=emb)
 
+#Look for better API
 #Run the Bot using Token
 client.run(Token)
