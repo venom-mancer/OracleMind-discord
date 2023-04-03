@@ -257,7 +257,7 @@ async def player(message):
     parsed_json = json.loads(file_contents)
 
     #seprating infos from json file
-    highest_mmr =parsed_json[0]['mmr_estimate']['estimate']
+    estimated_mmr =parsed_json[0]['mmr_estimate']['estimate']
     bestfriend = parsed_json[2][0]['personaname']
     winlose = parsed_json[1]["win"],parsed_json[1]["lose"]
     personname = parsed_json[0]["profile"]['personaname']
@@ -269,7 +269,7 @@ async def player(message):
     emb.set_author(name='Player Info ℹ️')
     emb.set_image(url='{}'.format(avatarpfp))
     emb.add_field(name='Win/Lose' , value='{}'.format(winlose))
-    emb.add_field(name='highest MMR ' , value='{}'.format(highest_mmr))
+    emb.add_field(name='estimated MMR ' , value='{}'.format(estimated_mmr))
     emb.add_field(name='Best Friend' , value='{}'.format(bestfriend))
     emb.add_field(name='Steam id URL' , value='{}'.format(usersteamid))
     await message.reply(embed=emb)
