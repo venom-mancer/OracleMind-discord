@@ -18,7 +18,7 @@ def talktobot(chat):
         prompt = "<|endoftext|>"+chat+"\n--\nLabel:",
         temperature=0.8,
         top_p=0.9,
-        max_tokens=450,
+        max_tokens=750,
     )
 
     output_label = response["choices"][0]["text"]
