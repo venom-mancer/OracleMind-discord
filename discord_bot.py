@@ -153,7 +153,6 @@ async def svcount(message):
         emb = discord.Embed(description='⚠️ You Dont have the Permission for this command', color=0x0d67d6)
         await message.channel.send(embed=emb)
 
-
 #create image $image
 @client.command()
 async def image(message):
@@ -169,8 +168,7 @@ async def image(message):
     elif image_url[1] == 2:
 
         await message.reply(image_url[0])
-
-
+        
 #check for server names using OracleMind $svname
 @client.command()
 async def svnames(message):
