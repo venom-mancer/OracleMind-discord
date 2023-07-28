@@ -47,7 +47,7 @@ async def on_reaction_add(reaction, user):
         if question_author_message.author.id == user.id and reaction.emoji == '🇮🇷':
 
             user_message = str(message.content)
-            translate = translator.eng_to_farsi_translate(user_message)
+            translate = translator.eng_translator(user_message)
 
             await message.edit(content=translate)
         else:
