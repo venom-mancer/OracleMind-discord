@@ -248,7 +248,7 @@ async def avatar(ctx):
 
     user = await client.fetch_user(message_content[8:])
     if user:
-        embed = discord.Embed(title=user.name, description=user.mention)
+        embed = discord.Embed(title=user.name, description=user.mention , color=0x0d67d6)
         embed.set_thumbnail(url=user.avatar.url)
         embed.add_field(name="ID", value=user.id, inline=False)
         embed.add_field(name="Created at", value=user.created_at.strftime("%m/%d/%Y %H:%M:%S"), inline=False)
