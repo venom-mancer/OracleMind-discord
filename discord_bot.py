@@ -240,38 +240,28 @@ async def inviteme(message):
         emb = discord.Embed(description='⚠️ You Dont have the Permission for this command', color=0x0d67d6)
         await message.channel.send(embed=emb)
 
-#player stats by their ID
+
 @client.command()
-async def player(message):
+async def avatar(ctx):
 
-    user_message = str(message.message.content)[7:]
-    playerinfo = await dota2_openapi.playerinfo(user_message)
+    if ctx.author == client.user:
+        return
     
-    #reading from json file that was made in dota2 > dota2_openapi.py
-    with open('match_result.json', 'r') as openfile:
-    
-        file_contents = openfile.read()
-    #parsing and loading json
-    parsed_json = json.loads(file_contents)
+    message_content = ctx.message
 
-    #seprating infos from json file
-    estimated_mmr =parsed_json[0]['mmr_estimate']['estimate']
-    bestfriend = parsed_json[2][0]['personaname']
-    winlose = parsed_json[1]["win"],parsed_json[1]["lose"]
-    personname = parsed_json[0]["profile"]['personaname']
-    avatarpfp = parsed_json[0]["profile"]['avatarfull']
-    usersteamid = parsed_json[0]["profile"]['profileurl']
+    if message_content :
+        if message_content.mentions:
+            user_pic = message_content.mentions[0].avatar.url
+            emb = discord.Embed(title='Profile Pic', color=0x0d67d6)
+            emb.set_image(url=user_pic)
+            await ctx.channel.send(embed=emb)
+        else:
+            user = message_content.author
 
-    #embed and send
-    emb = discord.Embed(title=personname, color=0x0d67d6)
-    emb.set_author(name='Player Info ℹ️')
-    emb.set_image(url='{}'.format(avatarpfp))
-    emb.add_field(name='Win/Lose' , value='{}'.format(winlose))
-    emb.add_field(name='estimated MMR ' , value='{}'.format(estimated_mmr))
-    emb.add_field(name='Best Friend' , value='{}'.format(bestfriend))
-    emb.add_field(name='Steam id URL' , value='{}'.format(usersteamid))
-    await message.reply(embed=emb)
 
-#Look for better API
+        
+
+        # # await message.channel.send(f'{user.name}\'s avatar: {avatar_url}')
+
 #Run the Bot using Token
 client.run(Token)
