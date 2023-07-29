@@ -244,24 +244,19 @@ async def inviteme(message):
 @client.command()
 async def avatar(ctx):
 
-    if ctx.author == client.user:
-        return
-    
-    message_content = ctx.message
+    message_content = ctx.message.content
 
-    if message_content :
-        if message_content.mentions:
-            user_pic = message_content.mentions[0].avatar.url
-            emb = discord.Embed(title='Profile Pic', color=0x0d67d6)
-            emb.set_image(url=user_pic)
-            await ctx.channel.send(embed=emb)
-        else:
-            user = message_content.author
+    user = await client.fetch_user(message_content[8:])
+    if user:
+        embed = discord.Embed(title=user.name, description=user.mention)
+        embed.set_thumbnail(url=user.avatar.url)
+        embed.add_field(name="ID", value=user.id, inline=False)
+        embed.add_field(name="Created at", value=user.created_at.strftime("%m/%d/%Y %H:%M:%S"), inline=False)
+        await ctx.send(embed=embed)
+    else:
+        await ctx.send("User not found.")
 
 
-        
-
-        # # await message.channel.send(f'{user.name}\'s avatar: {avatar_url}')
 
 #Run the Bot using Token
 client.run(Token)
