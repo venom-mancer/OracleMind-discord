@@ -6,6 +6,8 @@ from dota2 import dota2_openapi
 import json
 import random
 import re
+import sqlite3
+
 
 
 with open('config.json') as user_file:
