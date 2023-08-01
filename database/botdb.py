@@ -1,11 +1,11 @@
 import sqlite3
 
-conn = sqlite3.connect('sqlite.db')
+conn = sqlite3.connect('sqlite3.db')
 c = conn.cursor()
 
 # Create table
 c.execute('''CREATE TABLE commands
-             (user_id text, guild_id text, command text)''')
+             (user_name char,user_id int, guild_id int, command text)''')
 
 # Save (commit) the changes
 conn.commit()
