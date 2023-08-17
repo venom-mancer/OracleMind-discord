@@ -260,17 +260,6 @@ async def avatar(ctx):
         await ctx.send("User not found.")
 
 
-@client.event
-async def on_command(ctx):
-
-    # Insert a new row into the commands table
-    cursor = db.cursor()
-    cursor.execute("""
-        INSERT INTO commands (user_name, user_id, guild_id, command)
-        VALUES (?, ?, ?, ?)
-    """, (ctx.author.display_name ,ctx.author.id, ctx.guild.id,ctx.message.content))
-    db.commit()
-
 
 #Run the Bot using Token
 client.run(Token)
