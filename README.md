@@ -29,6 +29,7 @@ $ask -> for asking question from the bot
 $avatar -> for having a better look at pfp
 $clapass -> fun emote
 $poll -> for using poll in the server
+$image -> for creating images
 $roll -> for rolling numbers
 $inform -> for informing users (Admins Only)
 ```
