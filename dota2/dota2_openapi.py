@@ -16,7 +16,6 @@ async def fetch_all_json(urls):
         responses = await asyncio.gather(*tasks)
         return responses
 
-# example usage
 async def playerinfo(query):
     #needed urls to get query
     urls = [
