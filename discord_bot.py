@@ -2,11 +2,9 @@ import discord
 from discord.ext import commands , tasks
 from discord import embeds
 from chat import chat_with_bot , image_creation , translator
-from dota2 import dota2_openapi
 import json
 import random
 import re
-import sqlite3
 
 
 
@@ -17,7 +15,6 @@ parsed_json = json.loads(file_contents)
 
 Token = parsed_json["Token"]
 
-db = sqlite3.connect('sqlite3.db')
 intents = discord.Intents.all()
 intents.members = True
 client = commands.Bot(command_prefix = "$", intents = intents ,help_command=None)
