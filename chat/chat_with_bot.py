@@ -12,7 +12,7 @@ url = "https://chat-gpt26.p.rapidapi.com/"
 def talktobot(chat):
       
     payload = {
-      "model": "gpt-4-1106-preview",
+      "model": "gpt-3.5-turbo",
       "messages": [
         {
           "role": "user",
