@@ -1,4 +1,6 @@
 # OracleMind-discord
+- Soon LLAMA3 will be replaced with OpenAi API !!
+- 
 This bot is currently running on Discord
 <br>
 * URL :  https://discord.com/oauth2/authorize?client_id=1071823267851149382&permissions=1634235578432&scope=bot%20applications.commands
